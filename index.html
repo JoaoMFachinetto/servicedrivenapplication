@@ -1,0 +1,109 @@
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+        <script src="angular.min.js" type="application/javascript"></script>
+        <script src="init.js" type="application/javascript"></script>
+        <script src="Controllers/cadastrodecliente-controller.js" type="application/javascript"></script>
+        <script src="Controllers/buscontroller.js" type="application/javascript"></script>
+        <script src="Services/cepservice.js" type="application/javascript"></script>
+        <script src="Services/climaservice.js" type="application/javascript"></script>
+        <script src="Services/databusservice.js" type="application/javascript"></script>
+        <script src="Dataproxy/openweatherdataproxy.js" type="application/javascript"></script>
+        <script src="Dataproxy/widenetcepdataproxy.js" type="application/javascript"></script>
+
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <style type="text/css">
+            body {
+                min-height: 2000px;
+                padding-top: 70px;
+            }
+        </style>
+    </head>
+    <body ng-app="App" >
+        <!-- Fixed navbar -->
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Project name</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-6 col-md-4" ng-controller="CadastroDeClienteController">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Clima & Endereço</h3>
+                        </div>
+                        <div class="panel-heading">
+                            <form name="form">
+                                <div class="input-group">
+                                <input type="text" ng-model="cliente.cep" class="form-control" required>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" ng-click="ValidarCep(cliente)" ng-disabled='form.$invalid' type="button">Buscar</button>
+                                </span>
+                            </div>
+                            </form>
+                        </div>
+                        <div class="panel-body" ng-show='dadosdoendereco != null'>
+                            {{dadosdoendereco.address}} - {{dadosdoendereco.district}} - {{dadosdoendereco.city}} / {{dadosdoendereco.state}}
+                        </div>
+                        <div class="panel-body" ng-show='dadosclimaticos != null'>
+                            <h4>Previsão do tempo. <small>5 dias</small></h4>
+                            <div class="media" ng-repeat="clima in dadosclimaticos.list">
+                                <a class="pull-left" href="#">
+                                    <img class="media-object" alt="64x64" ng-src="http://openweathermap.org/img/w/{{clima.weather[0].icon}}.png" style="width: 64px; height: 64px;">
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">{{clima.dt|fromunixtime}}</h4>
+                                    {{clima.weather[0].description}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-8" ng-controller="DataBusController">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <button type="button" class="btn btn-default" ng-click='BuscarEventos()'>Buscar Eventos</button>
+                        </div>
+                        <div class="panel-body" ng-repeat='evento in eventos'>
+                            <div class="media">
+                                <a class="pull-left" href="#">
+                                    <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjZWVlIi8+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iMzIiIHk9IjMyIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjEycHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9zdmc+" style="width: 64px; height: 64px;">
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">{{evento.msg.status}} - {{evento.date.$date|fromisodate}}</h4>
+                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
