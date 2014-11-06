@@ -10,6 +10,8 @@
         <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
         <link href="{{url_for('static', filename='css/custom-navbar.css')}}" rel="stylesheet">
 
+        <script src="{{url_for('static', filename='js/angular.min.js')}}"></script>
+
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -49,7 +51,7 @@
                 </div>
             </div>
         </nav>
-        <div class="container">
+        <div class="container" ng-app="App">
             {% block body %}
 
 
@@ -60,6 +62,7 @@
         <script src="{{url_for('static', filename='js/jquery-1.11.1.min.js')}}"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+        <script src="{{url_for('static', filename='app/init.js')}}"></script>
         {% endblock %}
     </body>
 </html>

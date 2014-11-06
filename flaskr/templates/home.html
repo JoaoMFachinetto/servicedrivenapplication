@@ -3,7 +3,7 @@
 {{ super() }}
 <div class="row">
     <div class="col-md-6"></div>
-    <div class="col-md-4">
+    <div class="col-md-4" ng-controller="CadastroDeClienteController">
         <form role="form">
             <div class="form-group">
                 <label for="email">Nome:</label>
@@ -26,4 +26,14 @@
         </form>
     </div>
 </div>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+    <script src="{{url_for('static', filename='app/controllers/cadastrodecliente-controller.js')}}"></script>
+    <script src="{{url_for('static', filename='app/services/cepservice.js')}}"></script>
+    <script src="{{url_for('static', filename='app/services/climaservice.js')}}"></script>
+    <script src="{{url_for('static', filename='app/dataproxy/widenetcepdataproxy.js')}}"></script>
+    <script src="{{url_for('static', filename='app/dataproxy/openweatherdataproxy.js')}}"></script>
+    <script src="{{url_for('static', filename='app/dataproxy/geoipdataproxy.js')}}"></script>
+    <script src="{{url_for('static', filename='app/services/geoipservice.js')}}"></script>
 {% endblock %}
