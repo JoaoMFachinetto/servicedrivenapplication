@@ -1,9 +1,58 @@
 {% extends "master.html" %}
 {% block body %}
 {{ super() }}
-<div class="row">
-    <div class="col-md-6"></div>
-    <div class="col-md-4" ng-controller="CadastroDeClienteController">
+<div class="row" ng-controller="CadastroDeClienteController">
+    <div class="col-md-4">
+        <div class="page-header">
+            <h4><i class="fa fa-plug"></i> Dados da Conexão</h4>
+        </div>
+        <fieldset disabled>
+            <div class="form-group">
+                <label for="disabledTextInput">Endereço IP:</label>
+                <input type="text" value="[% dadosdoip.ip %]" id="disabledTextInput" class="form-control" placeholder="Disabled input">
+            </div>
+            <div class="form-group">
+                <label for="disabledTextInput">Cidade:</label>
+                <input type="text" value="[% dadosdoip.city %]" id="disabledTextInput" class="form-control" placeholder="Disabled input">
+            </div>
+            <div class="form-group">
+                <label for="disabledTextInput">Estado:</label>
+                <input type="text" value="[% dadosdoip.region %]" id="disabledTextInput" class="form-control" placeholder="Disabled input">
+            </div>
+            <div class="form-group">
+                <label for="disabledTextInput">País:</label>
+                <input type="text" value="[% dadosdoip.country %]" id="disabledTextInput" class="form-control" placeholder="Disabled input">
+            </div>
+            <div class="form-group">
+                <label for="disabledTextInput">Provedor de Internet:</label>
+                <input type="text" value="[% dadosdoip.isp %]" id="disabledTextInput" class="form-control" placeholder="Disabled input">
+            </div>
+            <div class="form-group">
+                <label for="disabledTextInput">Posição:</label>
+                <input type="text" value="Long: [% dadosdoip.longitude %], Lat: [% dadosdoip.latitude %]" id="disabledTextInput" class="form-control" placeholder="Disabled input">
+            </div>
+        </fieldset>
+
+
+    </div>
+    <div class="col-md-4">
+        <div class="page-header">
+            <h4><i class="fa fa-cloud"></i> Clima <small>Previsão para 5 dias</small></h4>
+        </div>
+        <div class="media" ng-repeat="clima in dadosclimaticos.list">
+            <a class="pull-left" href="#">
+                <img class="media-object" alt="64x64" ng-src="http://openweathermap.org/img/w/[%clima.weather[0].icon%].png" style="width: 64px; height: 64px;">
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading">[%clima.dt|fromunixtime%]</h4>
+                [%clima.weather[0].description%]
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="page-header">
+            <h4><i class="fa fa-pencil"></i> Cadastro</h4>
+        </div>
         <form role="form">
             <div class="form-group">
                 <label for="email">Nome:</label>
@@ -29,11 +78,11 @@
 {% endblock %}
 {% block scripts %}
 {{ super() }}
-    <script src="{{url_for('static', filename='app/controllers/cadastrodecliente-controller.js')}}"></script>
-    <script src="{{url_for('static', filename='app/services/cepservice.js')}}"></script>
-    <script src="{{url_for('static', filename='app/services/climaservice.js')}}"></script>
-    <script src="{{url_for('static', filename='app/dataproxy/widenetcepdataproxy.js')}}"></script>
-    <script src="{{url_for('static', filename='app/dataproxy/openweatherdataproxy.js')}}"></script>
-    <script src="{{url_for('static', filename='app/dataproxy/geoipdataproxy.js')}}"></script>
-    <script src="{{url_for('static', filename='app/services/geoipservice.js')}}"></script>
+<script src="{{url_for('static', filename='app/controllers/cadastrodecliente-controller.js')}}"></script>
+<script src="{{url_for('static', filename='app/services/cepservice.js')}}"></script>
+<script src="{{url_for('static', filename='app/services/climaservice.js')}}"></script>
+<script src="{{url_for('static', filename='app/dataproxy/widenetcepdataproxy.js')}}"></script>
+<script src="{{url_for('static', filename='app/dataproxy/openweatherdataproxy.js')}}"></script>
+<script src="{{url_for('static', filename='app/dataproxy/geoipdataproxy.js')}}"></script>
+<script src="{{url_for('static', filename='app/services/geoipservice.js')}}"></script>
 {% endblock %}

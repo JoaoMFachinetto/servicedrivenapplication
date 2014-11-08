@@ -12,8 +12,8 @@ App.controller('CadastroDeClienteController', ['$scope', 'CepService', 'ClimaSer
         });
     };
 
-    $scope.BuscarClima = function(cliente){
-        ClimaService.OpenWeatherProxy().BuscarClimaPorCep(cliente.cep).success(function(dados){
+    $scope.BuscarClimaPorGeoPosicao = function(latitude, longitude){
+        ClimaService.OpenWeatherProxy().BuscarClimaPorGeoPosicao(latitude, longitude).success(function(dados){
             $scope.dadosclimaticos = dados;
         });
     };
@@ -22,6 +22,7 @@ App.controller('CadastroDeClienteController', ['$scope', 'CepService', 'ClimaSer
     {
         GeoIpService.GeoIpDataProxy().BuscarDadosDoIp().success(function(dados){
             $scope.dadosdoip = dados;
+            $scope.BuscarClimaPorGeoPosicao(dados.latitude, dados.longitude);
         });
     }
 

@@ -11,3 +11,8 @@ App.filter("fromisodate", function(){
         return new Date(data).toLocaleDateString();
     };
 });
+
+App.config(function($interpolateProvider) {
+  $interpolateProvider.startSymbol('[%');
+  $interpolateProvider.endSymbol('%]');
+});
