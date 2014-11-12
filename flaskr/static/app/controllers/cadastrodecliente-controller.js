@@ -1,4 +1,4 @@
-App.controller('CadastroDeClienteController', ['$scope', 'CepService', 'ClimaService', 'GeoIpService', function($scope, CepService, ClimaService, GeoIpService) {
+App.controller('CadastroDeClienteController', ['$scope', '$log', 'CepService', 'ClimaService', 'GeoIpService', 'PushBulletService', function($scope, $log, CepService, ClimaService, GeoIpService, PushBulletService) {
     $scope.status = '';
     $scope.dadosdoendereco = null;
     $scope.dadosclimaticos = null;
@@ -26,6 +26,14 @@ App.controller('CadastroDeClienteController', ['$scope', 'CepService', 'ClimaSer
         });
     }
 
+    $scope.IniciarPushBullet = function()
+    {
+           PushBulletService.PushBulletAsyncService().StartAsync(function(e){
+               $log.log(e);
+           });
+    }
+
     $scope.BuscarDadosDoIp();
+    $scope.IniciarPushBullet();
 
 }]);
