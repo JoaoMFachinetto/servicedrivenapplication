@@ -1,26 +1,32 @@
-App.controller('CadastroDeClienteController', ['$scope', '$log', 'CepService', 'ClimaService', 'GeoIpService', 'PushBulletService', function($scope, $log, CepService, ClimaService, GeoIpService, PushBulletService) {
+App.controller('CadastroDeClienteController', ['$scope', '$log', 'CadastroClienteService', 'PushBulletService', function($scope, $log, CadastroClienteService, PushBulletService) {
     $scope.status = '';
     $scope.dadosdoendereco = null;
     $scope.dadosclimaticos = null;
     $scope.dadosdoip = null;
 
+    $scope.BuscarTodosClientes = function()
+    {
+        CadastroClienteService.PessoaGateway().BuscarTodos().success(function(dados){
+            $log.log(dados);
+        });
+    };
 
     $scope.ValidarCep = function(cliente){
-        CepService.WidenetDataproxy().BuscarEnderecoPeloCep(cliente.cep).success(function(dados){
+        CadastroClienteService.WidenetDataproxy().BuscarEnderecoPeloCep(cliente.cep).success(function(dados){
             $scope.dadosdoendereco = dados;
             $scope.BuscarClima(cliente);
         });
     };
 
     $scope.BuscarClimaPorGeoPosicao = function(latitude, longitude){
-        ClimaService.OpenWeatherProxy().BuscarClimaPorGeoPosicao(latitude, longitude).success(function(dados){
+        CadastroClienteService.OpenWeatherProxy().BuscarClimaPorGeoPosicao(latitude, longitude).success(function(dados){
             $scope.dadosclimaticos = dados;
         });
     };
 
     $scope.BuscarDadosDoIp = function()
     {
-        GeoIpService.GeoIpDataProxy().BuscarDadosDoIp().success(function(dados){
+        CadastroClienteService.GeoIpDataProxy().BuscarDadosDoIp().success(function(dados){
             $scope.dadosdoip = dados;
             $scope.BuscarClimaPorGeoPosicao(dados.latitude, dados.longitude);
         });
@@ -33,6 +39,7 @@ App.controller('CadastroDeClienteController', ['$scope', '$log', 'CepService', '
            });
     }
 
+    $scope.BuscarTodosClientes();
     $scope.BuscarDadosDoIp();
     $scope.IniciarPushBullet();
 

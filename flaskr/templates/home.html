@@ -79,6 +79,9 @@
 {% block scripts %}
 {{ super() }}
 <script src="{{url_for('static', filename='app/controllers/cadastrodecliente-controller.js')}}"></script>
+<script src="{{url_for('static', filename='app/services/cadastroclienteservice.js')}}"></script>
+<script src="{{url_for('static', filename='app/datagateways/datagatewaybase.js')}}"></script>
+<script src="{{url_for('static', filename='app/datagateways/pessoagateway.js')}}"></script>
 <script src="{{url_for('static', filename='app/services/cepservice.js')}}"></script>
 <script src="{{url_for('static', filename='app/services/climaservice.js')}}"></script>
 <script src="{{url_for('static', filename='app/dataproxy/widenetcepdataproxy.js')}}"></script>

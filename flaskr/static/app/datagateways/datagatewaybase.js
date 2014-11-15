@@ -1,7 +1,13 @@
-function DatagatewayBase (url) {
-    this.url = url;
+function DatagatewayBase (http, url) {
+    this.url = 'api/' + url;
+    this.http = http;
 }
 
-DatagatewayBase.prototype.buscarTodos = function() {
-    return {'r1': '212341341'};
+DatagatewayBase.prototype.BuscarTodos = function() {
+    return this.http.get(this.url + '/buscartodos');
+};
+
+DatagatewayBase.prototype.BuscarPorId = function(id)
+{
+    return this.http.get(this.url + '/buscarporid/' + id);
 };
