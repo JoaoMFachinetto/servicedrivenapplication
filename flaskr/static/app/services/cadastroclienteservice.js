@@ -1,4 +1,4 @@
-App.factory('CadastroClienteService', ['$http', function($http) {
+App.factory('CSG', ['$http', function($http) {
     var WidenetCepProxy = new WidenetCepDataproxy($http);
     var OpenWheather = new OpenWeatherDataproxy($http);
     var IpDataProxy = new GeoIpDataproxy($http);

@@ -1,10 +1,13 @@
 {% extends "master.html" %}
 {% block body %}
 {{ super() }}
+<div class="page-header">
+  <h1>CadastroClienteController <small>via CadastroClienteService</small></h1>
+</div>
 <div class="row" ng-controller="CadastroDeClienteController">
     <div class="col-md-4">
         <div class="page-header">
-            <h4><i class="fa fa-plug"></i> Dados da Conexão</h4>
+            <h4><i class="fa fa-plug"></i> Dados da Conexão <small> via Proxy</small></h4>
         </div>
         <fieldset disabled>
             <div class="form-group">
@@ -37,7 +40,7 @@
     </div>
     <div class="col-md-4">
         <div class="page-header">
-            <h4><i class="fa fa-cloud"></i> Clima <small>Previsão para 5 dias</small></h4>
+            <h4><i class="fa fa-cloud"></i> Clima <small>via Proxy</small></h4>
         </div>
         <div class="media" ng-repeat="clima in dadosclimaticos.list">
             <a class="pull-left" href="#">
@@ -51,7 +54,7 @@
     </div>
     <div class="col-md-4">
         <div class="page-header">
-            <h4><i class="fa fa-pencil"></i> Cadastro</h4>
+            <h4><i class="fa fa-pencil"></i> Cadastro<small> via Gateway</small></h4>
         </div>
         <form role="form">
             <div class="form-group">
@@ -88,6 +91,4 @@
 <script src="{{url_for('static', filename='app/dataproxy/openweatherdataproxy.js')}}"></script>
 <script src="{{url_for('static', filename='app/dataproxy/geoipdataproxy.js')}}"></script>
 <script src="{{url_for('static', filename='app/services/geoipservice.js')}}"></script>
-<script src="{{url_for('static', filename='app/services/pushbulletservice.js')}}"></script>
-<script src="{{url_for('static', filename='app/dataproxy/pushbulletdataproxy.js')}}"></script>
 {% endblock %}
