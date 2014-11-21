@@ -38,8 +38,6 @@ App.controller('CadastroDeClienteController', ['$scope', '$log', 'CSG', function
             $log.info('ok');
         });
     }
-
-    $scope.BuscarTodosClientes();
     $scope.BuscarDadosDoIp();
 
 }]);
