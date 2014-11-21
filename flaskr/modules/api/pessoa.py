@@ -7,13 +7,13 @@ from bson.objectid import ObjectId
 
 pessoa_router = Blueprint('pessoa', __name__)
 
-@pessoa_router.route('/api/pessoa/novo', methods=['POST'])
+@pessoa_router.route('/pessoa/api/novo', methods=['POST'])
 def novo():
     try:
-        message_gateway = MessageGateway()
+        pessoa_gateway = PessoaGateway()
         data = request.get_json(force=True)
-        message_gateway.register_new(g.app_session['_id'], data)
-        return str(data)
+        pessoa_gateway.register_new(data)
+        return "ok"
     except RecordAlreadyExistsException as ex:
         return str(ex.record['_id'])
 

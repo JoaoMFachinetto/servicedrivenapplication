@@ -32,6 +32,13 @@ App.controller('CadastroDeClienteController', ['$scope', '$log', 'CSG', function
         });
     }
 
+    $scope.NovoCliente = function(Formulario)
+    {
+        CSG.PessoaGateway().Novo(Formulario).success(function(dados) {
+            $log.info('ok');
+        });
+    }
+
     $scope.BuscarTodosClientes();
     $scope.BuscarDadosDoIp();
 

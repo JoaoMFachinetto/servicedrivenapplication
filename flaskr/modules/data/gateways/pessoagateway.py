@@ -5,12 +5,8 @@ class PessoaGateway(GatewayBase):
     def __init__(self):
         GatewayBase.__init__(self, 'Pessoa')
 
-    def register_new(self, nome, ultimonome, cpf):
-        pessoa = self.current_table.find_one({'Nome': ultimonome})
-        if pessoa is None:
-            self.add({'Nome': nome, 'UltimoNome': ultimonome})
-        else:
-            raise RecordAlreadyExistsException(pessoa)
+    def register_new(self, Pessoa):
+            self.add(Pessoa)
 
     def get_pessoa_por_nome(self, nome):
         pessoa_corrente = self.current_table.find_one({'Nome': nome})

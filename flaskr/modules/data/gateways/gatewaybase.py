@@ -4,7 +4,7 @@ from bson.objectid import ObjectId
 class GatewayBase():
     def __init__(self, table):
         self.mongo_client = MongoClient()
-        self.current_table = self.mongo_client['MessageHub'][table]
+        self.current_table = self.mongo_client['FrontInFloripa'][table]
 
     def get_all(self):
         return self.current_table.find()
