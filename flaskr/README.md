@@ -6,8 +6,10 @@ Aplicação orientada a servicos com AngularJs e Javascript
 
 Para rodar a aplicação você precisa:
 
-1 - Ter instalado o  Python;
+1 - Ter instalado o  Python
+
 2 - Instalar o PIP: (sudo apt-get install python-pip)
+
 3 - Instalar o Flask (pip install Flask)
 
 Passos para rodar a aplicação:
