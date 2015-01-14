@@ -1,7 +1,7 @@
 servicedrivenapplication
 ========================
 
-Aplicação orientada a servicos com AngularJs e Javascript
+Aplicação orientada a serviços com AngularJs e Javascript
 
 
 Para rodar a aplicação você precisa:
